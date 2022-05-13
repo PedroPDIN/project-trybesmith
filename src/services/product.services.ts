@@ -16,7 +16,6 @@ export default class ProductService {
 
   public async create(product: IProduct): Promise<IProduct> {
     const newProduct = await this.model.create(product);
-    console.log('service', newProduct);
     return newProduct;
   }
 }

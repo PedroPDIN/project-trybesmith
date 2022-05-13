@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import productSchema from '../joi/product.joi';
 
-const isRequired = async (req: Request, res: Response, next: NextFunction) => {
+const isRequiredProduct = async (req: Request, res: Response, next: NextFunction) => {
   const { name, amount } = req.body;
   if (!name) return res.status(400).json({ message: '"name" is required' });
   if (!amount) return res.status(400).json({ message: '"amount" is required' });
@@ -15,6 +15,6 @@ const isValidProduct = async (req: Request, res: Response, next: NextFunction) =
 };
 
 export default {
-  isRequired,
+  isRequiredProduct,
   isValidProduct,
 };

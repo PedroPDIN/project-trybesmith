@@ -5,9 +5,9 @@ import * as validation from '../middlewares/validation/product.validation';
 const routeProduct = Router();
 
 const controller = new ProductController();
-const { isRequired, isValidProduct } = validation.default;
+const { isRequiredProduct, isValidProduct } = validation.default;
 
 routeProduct.get('/', controller.getAll);
-routeProduct.post('/', isRequired, isValidProduct, controller.create);
+routeProduct.post('/', isRequiredProduct, isValidProduct, controller.create);
 
 export default routeProduct;

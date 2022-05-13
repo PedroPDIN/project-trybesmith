@@ -12,7 +12,6 @@ export default class ProductController {
   public create = async (req: Request, res: Response): Promise<Response> => {
     const product = req.body;
     const newProduct = await this.service.create(product);
-    console.log('controller', newProduct);
     return res.status(201).json(newProduct);
   };
 }
