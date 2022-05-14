@@ -5,7 +5,7 @@ import ProductModel from './product.model';
 type Order = {
   id: number;
   userId: number;
-}
+};
 
 export default class OrderModel {
   public connection: Pool;
