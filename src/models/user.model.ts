@@ -1,6 +1,11 @@
 import { Pool } from 'mysql2/promise';
 import { IUser } from '../interfaces/user.interface';
 
+type Login = {
+  id: number,
+  username: string,
+};
+
 export default class UserModel {
   public connection: Pool;
 
@@ -15,35 +20,18 @@ export default class UserModel {
     await this.connection.execute(query, [username, classe, level, password]);
   }
 
-/*   public async loginUser(username: string): Promise<string | null > {
+  public async login(username: string, password: string): Promise<Login | null > {
     const queryUserName = `
     SELECT 
-    CASE 
-    WHEN EXISTS(SELECT username FROM Trybesmith.Users WHERE username = ?)
-    THEN 'exist'
-    END as username;
+    id, username
+    FROM Trybesmith.Users
+    WHERE username = ? and password = ?;
     `;
 
-    const [row] = await this.connection.execute(queryUserName, [username]);
-    const [user] = row as User[];
+    const [row] = await this.connection.execute(queryUserName, [username, password]);
+    const [user] = row as Login[];
 
     if (!row) return null;
-    return user.username;
+    return user;
   }
-
-  public async loginPassword(password: Password): Promise<string | null > {
-    const queryPassword = `
-    SELECT 
-    CASE 
-    WHEN EXISTS(SELECT username FROM Trybesmith.Users WHERE password = ?)
-    THEN 'exist'
-    END as password;
-    `;
-
-    const [row] = await this.connection.execute(queryPassword, [password]);
-    const [pass] = row as Password[];
-
-    if (!row) return null;
-    return pass.password;
-  } */
 }

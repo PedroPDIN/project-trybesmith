@@ -1,14 +1,10 @@
-const isValidUsername = (value: string | null) => {
-  if (!value) return false;
-  return true;
+import { Request, Response, NextFunction } from 'express';
+import loginSchema from '../joi/login.joi';
+
+const isValidLogin = async (req: Request, res: Response, next: NextFunction) => {
+  const { error } = loginSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.message });
+  next();
 };
 
-const isValidPassword = (value: string | null) => {
-  if (!value) return false;
-  return true;
-};
-
-export default {
-  isValidUsername,
-  isValidPassword,
-};
+export default isValidLogin;

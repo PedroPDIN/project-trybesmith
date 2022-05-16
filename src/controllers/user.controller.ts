@@ -9,4 +9,12 @@ export default class UserController {
     const result = await this.service.create(product, product.password);
     return res.status(201).json({ token: result });
   };
+
+  public login = async (req: Request, res: Response): Promise<Response> => {
+    const { username, password } = req.body;
+    const login = await this.service.login({ username, password });
+    
+    if (!login.message) return res.status(login.key).json({ token: login.token });
+    return res.status(login.key).json({ message: login.message });
+  };
 }
